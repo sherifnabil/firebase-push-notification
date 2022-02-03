@@ -22,10 +22,10 @@ class FCMController extends Controller
 
     public function sendWebNotification(Request $request)
     {
-        // $FcmToken = User::whereNotNull('device_key')->pluck('device_key')->all();
+        $FcmToken = User::whereNotNull('device_key')->pluck('device_key')->all();
 
         $data = [
-            "registration_ids" => [auth()->user()->device_key],
+            "registration_ids" => $FcmToken,
             "notification" => [
                 "title" => $request->title,
                 "body" => $request->body,
